@@ -1,11 +1,17 @@
-import './App.css';
+import React from 'react'
+import { Provider } from 'react-redux'
+import './App.css'
+import store from './redux/store'
+import Pages from './components/Pages'
 
-function App() {
+function App () {
   return (
-    <div className="App">
-<h2>Links News 2</h2>
-    </div>
-  );
+    <Provider store={store}>
+      <div className='App'>
+        <Pages />
+      </div>
+    </Provider>
+  )
 }
 
-export default App;
+export default App

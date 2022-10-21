@@ -1,16 +1,38 @@
 import React from 'react'
-import { Provider } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './App.css'
-import store from './redux/store'
-import Pages from './components/Pages'
+import Pages from './components/pages/Pages'
+import Login from './components/login/Login'
+import { readLogin } from './redux/login/loginActions'
 
-function App () {
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
+import ErrorPage from './components/error-page/error-page'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Pages />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+]);
+
+function App() {
+
+  const dispatch = useDispatch();
+  dispatch(readLogin())
+
   return (
-    <Provider store={store}>
-      <div className='App'>
-        <Pages />
-      </div>
-    </Provider>
+    <div className='App'>
+        <RouterProvider router={router} />
+    </div>
   )
 }
 

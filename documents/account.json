@@ -1,0 +1,31 @@
+[
+    {
+        "id": "3248e427-f797-4804-ab2e-642170300301",
+        "name": "string",
+        "pages": [
+            {
+                "id": "",
+                "name": "Main page",
+                "rows": [
+                    {
+                        "id": "",
+                        "name": "Row 1",
+                        "columns": [
+                            {
+                                "id": "",
+                                "name": "Column 1",
+                                "links": [
+                                    {
+                                        "id": "",
+                                        "url": "Url 10",
+                                        "name": "Link 10"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

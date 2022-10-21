@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { fetchAccount } from '../redux'
+import { fetchAccount } from '../../redux'
+import { Link } from "react-router-dom"
 
 function Pages ({ data, fetchAccount }) {
 
@@ -15,6 +16,7 @@ function Pages ({ data, fetchAccount }) {
   ) : (
     <div>
       <h2>Account</h2>
+      <Link to="login">To Login</Link>
       <div>
         {
           JSON.stringify(data.account)
@@ -26,7 +28,7 @@ function Pages ({ data, fetchAccount }) {
 
 const mapStateToProps = state => {
   return {
-    data: state.account
+    data: state.accountData
   }
 }
 

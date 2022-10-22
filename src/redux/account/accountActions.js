@@ -11,12 +11,10 @@ export const fetchAccount = () => {
     axios
       .get('https://localhost:7055/account/default')
       .then(response => {
-        // response.data is the users
         const account = response.data
         dispatch(fetchAccountSuccess(account))
       })
       .catch(error => {
-        // error.message is the error message
         dispatch(fetchAccountFailure(error.message))
       })
   }

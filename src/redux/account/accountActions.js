@@ -9,7 +9,7 @@ export const fetchAccount = () => {
   return (dispatch) => {
     dispatch(fetchAccountRequest())
     axios
-      .get('https://localhost:7055/account/default')
+      .get('https://localhost:7055/account')
       .then(response => {
         const account = response.data
         dispatch(fetchAccountSuccess(account))

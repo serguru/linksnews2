@@ -6,13 +6,12 @@ import Login from './components/login/Login'
 import { readLogin } from './redux/login/loginActions'
 import {
   createBrowserRouter,
-  RouterProvider,
-  Route,
+  RouterProvider
 } from "react-router-dom";
 import ErrorPage from './components/error-page/error-page'
 import axios from 'axios'
 import store from './redux/store'
-
+import Page from './components/page/Page' 
 
 axios.interceptors.request.use(
   config => {
@@ -28,12 +27,15 @@ axios.interceptors.request.use(
   }
 );
 
-
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Pages />,
     errorElement: <ErrorPage />
+  },
+  {
+    path: "/page/:name",
+    element: <Page />,
   },
   {
     path: "/login",

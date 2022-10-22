@@ -1,0 +1,9 @@
+.pagesContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.pageLink {
+    padding: 1em;
+    font-weight: bolder;
+}

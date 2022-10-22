@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { fetchAccount } from '../../redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
+import "./Pages.css";
 
-function Pages ({ data, fetchAccount }) {
+function Pages() {
 
-  useEffect(() => {
-    fetchAccount()
-  }, [])
+  const data = useSelector(state => state.accountData)
+  const loginData = useSelector(state => state.loginData)
 
   return data.loading ? (
     <h2>Loading</h2>
@@ -15,30 +14,36 @@ function Pages ({ data, fetchAccount }) {
     <h2>{data.error}</h2>
   ) : (
     <div>
-      <h2>Account</h2>
-      <Link to="login">To Login</Link>
-      <div>
+      <h2>{loginData.name || 'Not logged in'}</h2>
+      <div className="pagesContainer">
         {
-          JSON.stringify(data.account)
+          data.account.pages.map(page => (
+            <div className="pageLink" key={page.name}>
+              <Link to={"page/"+page.name}>{page.name}</Link>
+              {/* <Link to={"page"}>{page.name}</Link> */}
+            </div>
+          ))
         }
       </div>
     </div>
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    data: state.accountData
-  }
-}
+// const mapStateToProps = state => {
+//   return {
+//     data: state.accountData
+//   }
+// }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchAccount: () => dispatch(fetchAccount())
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     fetchAccount: () => dispatch(fetchAccount())
+//   }
+// }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Pages)
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(Pages)
+
+export default Pages;

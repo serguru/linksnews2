@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import './App.css'
 import Pages from './components/pages/Pages'
+import PagesEdit from './components/pages/PagesEdit'
 import Login from './components/login/Login'
 import { readLogin } from './redux/login/loginActions'
 import {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Pages />,
     errorElement: <ErrorPage />
+  },
+  {
+    path: "/pages/edit",
+    element: <PagesEdit />
   },
   {
     path: "/page/:name",

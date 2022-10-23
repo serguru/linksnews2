@@ -19,31 +19,14 @@ function Pages() {
         {
           data.account.pages.map(page => (
             <div className="pageLink" key={page.name}>
-              <Link to={"page/"+page.name}>{page.name}</Link>
-              {/* <Link to={"page"}>{page.name}</Link> */}
+              <Link to={"page/" + page.name}>{page.name}</Link>
             </div>
           ))
+
         }
       </div>
     </div>
   )
 }
-
-// const mapStateToProps = state => {
-//   return {
-//     data: state.accountData
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     fetchAccount: () => dispatch(fetchAccount())
-//   }
-// }
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Pages)
 
 export default Pages;

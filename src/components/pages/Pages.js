@@ -17,8 +17,8 @@ function Pages() {
       <h2>{loginData.name || 'Not logged in'}</h2>
       <div className="pagesContainer">
         {
-          data.account.pages.map(page => (
-            <div className="pageLink" key={page.name}>
+          data.account?.pages.map(page => (
+            <div className="pageLink" key={page.id}>
               <Link to={"page/" + page.name}>{page.name}</Link>
             </div>
           ))

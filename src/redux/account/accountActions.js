@@ -7,20 +7,19 @@ import {
   UPDATE_ACCOUNT_SUCCESS,
   UPDATE_ACCOUNT_FAILURE
 } from './accountTypes'
+import store from '../../redux/store'
 
 export const fetchAccount = () => {
-  return (dispatch) => {
-    dispatch(fetchAccountRequest())
-    axios
-      .get('https://localhost:7055/account')
-      .then(response => {
-        const account = response.data
-        dispatch(fetchAccountSuccess(account))
-      })
-      .catch(error => {
-        dispatch(fetchAccountFailure(error.message))
-      })
-  }
+  store.dispatch(fetchAccountRequest())
+  axios
+    .get('https://localhost:7055/account')
+    .then(response => {
+      const account = response.data
+      store.dispatch(fetchAccountSuccess(account))
+    })
+    .catch(error => {
+      store.dispatch(fetchAccountFailure(error.message))
+    })
 }
 
 export const fetchAccountRequest = () => {
@@ -44,18 +43,16 @@ export const fetchAccountFailure = error => {
 }
 
 export const updateAccount = (account) => {
-  return (dispatch) => {
-    dispatch(updateAccountRequest())
-    axios
-      .put('https://localhost:7055/account', account)
-      .then(response => {
-        const account = response.data
-        dispatch(updateAccountSuccess(account))
-      })
-      .catch(error => {
-        dispatch(updateAccountFailure(error.message))
-      })
-  }
+  store.dispatch(updateAccountRequest())
+  axios
+    .put('https://localhost:7055/account', account)
+    .then(response => {
+      const account = response.data
+      store.dispatch(updateAccountSuccess(account))
+    })
+    .catch(error => {
+      store.dispatch(updateAccountFailure(error.message))
+    })
 }
 
 export const updateAccountRequest = () => {

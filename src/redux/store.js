@@ -1,16 +1,11 @@
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import logger from 'redux-logger'
-import thunk from 'redux-thunk'
+import { createStore } from 'redux'
 import { fetchAccount } from './account/accountActions'
 
 import rootReducer from './rootReducer'
 
 const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(logger, thunk))
+  rootReducer
 )
-
 
 function select(state) {
   return state.loginData.name
@@ -22,7 +17,8 @@ function handleChange() {
   current = select(store.getState())
 
   if (previous !== current) {
-    store.dispatch(fetchAccount())
+//    store.dispatch(fetchAccount())
+    fetchAccount()
   }
 }
 

@@ -5,6 +5,8 @@ import { PresentMode } from '../../helpers/enums';
 import PageEdit from './PageEdit';
 import PageBrowse from './PageBrowse';
 import PageHighlight from './PageHighlight';
+import store from '../../redux/store'
+import { updateAccount } from '../../redux/account/accountActions';
 
 const Pages = () => {
 
@@ -30,8 +32,19 @@ const Pages = () => {
     setCurrentPage(page);
   }
 
+  const cloneAccount = () => {
+    return JSON.parse(JSON.stringify(store.getState().accountData.account));
+  }
+
   const add = () => {
-    // TODO
+    let account = cloneAccount();
+    account.pages.push({
+      id: "",
+      name: "new page",
+      path: "newpage",
+      rows: []
+    })
+    updateAccount(account);
     setMode(undefined);
     setCurrentPage(undefined);
   }
@@ -41,14 +54,25 @@ const Pages = () => {
     setCurrentPage(page);
   }
 
-  const remove = () => {
-    // TODO
+  const remove = (page) => {
+    let account = cloneAccount();
+    const index = account.pages.indexOf(page);
+    account.pages.splice(index, 1);
+    updateAccount(account);
     setMode(undefined);
     setCurrentPage(undefined);
   }
 
+  const applyPage = (account, name, path) => {
+    const page = account.pages.find(page => page.id === currentPage.id);
+    page.name = name;
+    page.path = path;
+  }
+
   const save = (name, path) => {
-    // TODO
+    let account = cloneAccount();
+    applyPage(account, name, path);
+    updateAccount(account);
     setMode(undefined);
     setCurrentPage(undefined);
   }

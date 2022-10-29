@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import './App.css'
 import Pages from './components/pages/Pages'
 import PagesEdit from './components/pages/PagesEdit'
+import PageEdit from './components/page/PageEdit'
 import Login from './components/login/Login'
 import { readLogin } from './redux/login/loginActions'
 import {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "/page/:name",
     element: <Page />,
+  },
+  {
+    path: "/page/edit/:name",
+    element: <PageEdit />
   },
   {
     path: "/login",

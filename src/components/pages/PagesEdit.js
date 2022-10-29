@@ -20,14 +20,8 @@ const PagesEdit = () => {
       }
       page.name = newPage.name;
     })
-    // add ids
-    const newPages = [];
-    modifiedPages
-      .filter(page => !page.id)
-      .forEach(page => {
-        newPages.push({id: '', name: page.name, rows: []})
-      });
     // added
+    const newPages = modifiedPages.filter(page => page.id === '');
     if (newPages.length === 0) {
       return;
     }
@@ -91,7 +85,7 @@ const PagesEdit = () => {
                     </div>
                   ))
                 ) : (
-                  <button type="button" onClick={() => arrayHelpers.push('')}>
+                  <button type="button" onClick={() => arrayHelpers.push({id: '', name: '', rows: []})}>
                     Add a page
                   </button>
                 )}

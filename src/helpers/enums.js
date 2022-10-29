@@ -1,0 +1,1 @@
+export const PresentMode = { Highlight: 1, Edit: 2}

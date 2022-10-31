@@ -41,3 +41,12 @@ input.input-error,
 select.input-error {
   border-color: #fc8181;
 }
+
+.highlightedComponent {
+  border: 2px dashed lightgrey;
+  border-radius: 0.5em;
+}
+
+.clickableElement {
+  cursor: pointer;
+}

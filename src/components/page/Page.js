@@ -9,7 +9,6 @@ import { updateAccount } from '../../redux/account/accountActions';
 import { PresentMode } from '../../helpers/enums';
 import { cloneAccount } from '../../helpers/utils';
 
-
 const Page = () => {
   const { path } = useParams();
 
@@ -19,12 +18,12 @@ const Page = () => {
     return page;
   })
 
-  const [currentRow, setCurrentRow] = useState();
+  const [current, setCurrent] = useState();
   const [mode, setMode] = useState();
 
-  const select = (row) => {
+  const select = (obj) => {
     setMode(PresentMode.Highlight);
-    setCurrentRow(row);
+    setCurrent(obj);
   }
 
   const add = () => {
@@ -37,12 +36,12 @@ const Page = () => {
     })
     updateAccount(account);
     setMode(undefined);
-    setCurrentRow(undefined);
+    setCurrent(undefined);
   }
 
   const edit = (row) => {
     setMode(PresentMode.Edit);
-    setCurrentRow(row);
+    setCurrent(row);
   }
 
   const remove = (row) => {
@@ -56,36 +55,36 @@ const Page = () => {
     p.rows.splice(index, 1);
     updateAccount(account);
     setMode(undefined);
-    setCurrentRow(undefined);
+    setCurrent(undefined);
   }
 
   const save = (name) => {
     const account = cloneAccount();
     const p = account.pages.find(x => x.id === page.id);
-    const r = p.rows.find(x => x.id === currentRow.id);
+    const r = p.rows.find(x => x.id === current.id);
     r.name = name;
     updateAccount(account);
     setMode(undefined);
-    setCurrentRow(undefined);
+    setCurrent(undefined);
   }
 
   const cancel = () => {
     setMode(undefined);
-    setCurrentRow(undefined);
+    setCurrent(undefined);
   }
 
-  return page ? (
+  return page.rows.length > 0 ? (
     <div className="pageContainer">
       {
         page.rows.map(row => (
           <div className="pageRow" key={row.id}>
-            {(!currentRow || currentRow !== row) &&
-              <RowBrowse row={row} select={select}/>
+            {(!current || current !== row) &&
+              <RowBrowse page={page} row={row} select={select} setMode={setMode} setCurrent={setCurrent} current={current} mode={mode}/>
             }
-            {currentRow && currentRow === row && mode === PresentMode.Highlight &&
+            {current && current === row && mode === PresentMode.Highlight &&
               <RowHighlight row={row} add={add} edit={edit} remove={remove} cancel={cancel}/>
             }
-            {currentRow && currentRow === row && mode === PresentMode.Edit &&
+            {current && current === row && mode === PresentMode.Edit &&
               <RowEdit row={row} save={save} cancel={cancel} />
             }
           </div>
@@ -93,7 +92,7 @@ const Page = () => {
       }
     </div>
   ) : (
-    <div>No page found</div>
+    <div className="clickableElement" onClick={() => add()}>Add a row</div>
 
   )
 }

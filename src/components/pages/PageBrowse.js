@@ -3,29 +3,16 @@ import React, { useState } from 'react'
 
 const PageBrowse = ({ page, select }) => {
 
-    const [btn, setBtn] = useState(false);
-
-    const mouseEnter = (e) => {
+    const click = (e) => {
         if (!e.ctrlKey) {
             return;
         }
-        setBtn(true);
+        e.preventDefault();
+        select(page);
     }
 
-    const mouseLeave = () => {
-        setBtn(false);
-    }
-
-
-    return <div
-        onMouseEnter={(e) => {
-            mouseEnter(e)
-        }}
-
-        onMouseLeave={() => mouseLeave()}
-    >
-        {btn && <button onClick={() => select(page)}>Select</button>}
-        <Link to={"page/" + page.path}>{page.name}</Link>
+    return <div>
+        <Link to={"page/" + page.path} onClick={(e) => click(e)} title="Ctrl+click to edit">{page.name}</Link>
     </div>
 }
 

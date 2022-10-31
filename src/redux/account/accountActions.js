@@ -9,10 +9,13 @@ import {
 } from './accountTypes'
 import store from '../../redux/store'
 
+const apiUrl = 'https://localhost:7055/account';
+//const apiUrl = 'https://linksnews2api.azurewebsites.net/account';
+
 export const fetchAccount = () => {
   store.dispatch(fetchAccountRequest())
   axios
-    .get('https://localhost:7055/account')
+    .get(apiUrl)
     .then(response => {
       const account = response.data
       store.dispatch(fetchAccountSuccess(account))
@@ -45,8 +48,8 @@ export const fetchAccountFailure = error => {
 export const updateAccount = (account) => {
   store.dispatch(updateAccountRequest())
   axios
-    .put('https://localhost:7055/account', account)
-    .then(response => {
+  .put(apiUrl, account)
+  .then(response => {
       const account = response.data
       store.dispatch(updateAccountSuccess(account))
     })

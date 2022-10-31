@@ -1,43 +1,93 @@
-import "./RowBrowse.css"
-import Column from '../column/Column'
-import React, { useState } from 'react'
+import "./Row.css"
+import "../../App.css"
+import ColumnBrowse from '../column/ColumnBrowse'
+import ColumnEdit from '../column/ColumnEdit'
+import ColumnHighlight from '../column/ColumnHighlight'
+import { PresentMode } from '../../helpers/enums';
+import { updateAccount } from '../../redux/account/accountActions';
+import { cloneAccount } from '../../helpers/utils';
 
-const RowBrowse = ({ row, select }) => {
 
-    const [btn, setBtn] = useState(false);
+const RowBrowse = ({ page, row, select, setMode, setCurrent, current, mode }) => {
 
-    const mouseEnter = (e) => {
-        if (!e.ctrlKey) {
-            return;
+    const add = () => {
+        const account = cloneAccount();
+        const rows = account.pages.find(p => p.id === page.id).rows;
+        const columns = rows.find(x => x.id === row.id).columns;
+        columns.push({
+            id: "",
+            name: "new column",
+            links: []
+        })
+        updateAccount(account);
+        setMode(undefined);
+        setCurrent(undefined);
+    }
+
+    const edit = (column) => {
+        setMode(PresentMode.Edit);
+        setCurrent(column);
+    }
+
+    const remove = (column) => {
+        const account = cloneAccount();
+        const p = account.pages.find(p => p.id === page.id);
+        const r = p.rows.find(x => x.id === row.id);
+        const c = r.columns.find(x => x.id === column.id);
+        const index = r.columns.indexOf(c);
+        if (index < 0) {
+            throw new Error("Column to remove not found");
         }
-        setBtn(true);
+        r.columns.splice(index, 1);
+        updateAccount(account);
+        setMode(undefined);
+        setCurrent(undefined);
     }
 
-    const mouseLeave = () => {
-        setBtn(false);
+    const save = (name) => {
+        const account = cloneAccount();
+        const p = account.pages.find(x => x.id === page.id);
+        const r = p.rows.find(x => x.id === row.id);
+        const c = r.columns.find(x => x.id === current.id);
+        c.name = name;
+        updateAccount(account);
+        setMode(undefined);
+        setCurrent(undefined);
     }
 
-    return row ? (
-        <div className="rowContainer"
-            onMouseEnter={(e) => {
-                mouseEnter(e)
-            }}
+    const cancel = () => {
+        setMode(undefined);
+        setCurrent(undefined);
+    }
 
-            onMouseLeave={() => mouseLeave()}
-        >
-            {btn && <button onClick={() => select(row)}>Select</button>}
-            {row.name && <div>{row.name}</div>}
+    const element = row.columns.length > 0 ? <div className="rowContainer">
             {
                 row.columns.map(column => (
-                    <div key={column.name}>
-                        <Column column={column} />
+                    <div className="rowColumn" key={column.id}>
+                        {(!current || current !== column) &&
+                            <ColumnBrowse page={page} row={row} column={column} select={select} setMode={setMode} setCurrent={setCurrent} current={current} mode={mode} />
+                        }
+                        {current && current === column && mode === PresentMode.Highlight &&
+                            <ColumnHighlight column={column} add={add} edit={edit} remove={remove} cancel={cancel} />
+                        }
+                        {current && current === column && mode === PresentMode.Edit &&
+                            <ColumnEdit column={column} save={save} cancel={cancel} />
+                        }
                     </div>
                 ))
             }
         </div>
-    ) : (
-        <div>No columns</div>
+     : <div className="clickableElement" onClick={() => add()}>Add a column</div>
+
+
+    return (
+        <div>
+            <div className="clickableElement" onClick={() => select(row)} title="Click to edit">{row.name || "No name row"}</div>
+            {element}
+        </div>
     )
+
+
 }
 
 export default RowBrowse

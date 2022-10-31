@@ -67,7 +67,7 @@ const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current,
     const element = column.links.length > 0 ? <div className="columnContainer">
             {
                 column.links.map(link => (
-                    <div className="columnLink" key={link.id}>
+                    <div key={link.id}>
                         {(!current || current !== link) &&
                             <LinkBrowse link={link} select={select} />
                         }

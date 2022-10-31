@@ -8,9 +8,12 @@ import RowHighlight from "../row/RowHighlight";
 import { updateAccount } from '../../redux/account/accountActions';
 import { PresentMode } from '../../helpers/enums';
 import { cloneAccount } from '../../helpers/utils';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import { useNavigate } from "react-router-dom";
 
 const Page = () => {
   const { path } = useParams();
+  const navigate = useNavigate();
 
   const page = useSelector(state => {
     const pages = state.accountData.account?.pages;
@@ -75,14 +78,17 @@ const Page = () => {
 
   return page.rows.length > 0 ? (
     <div className="pageContainer">
+      <div className="clickableElement home">
+        <HomeRoundedIcon onClick={() => navigate("/")} />
+      </div>
       {
         page.rows.map(row => (
           <div className="pageRow" key={row.id}>
             {(!current || current !== row) &&
-              <RowBrowse page={page} row={row} select={select} setMode={setMode} setCurrent={setCurrent} current={current} mode={mode}/>
+              <RowBrowse page={page} row={row} select={select} setMode={setMode} setCurrent={setCurrent} current={current} mode={mode} />
             }
             {current && current === row && mode === PresentMode.Highlight &&
-              <RowHighlight row={row} add={add} edit={edit} remove={remove} cancel={cancel}/>
+              <RowHighlight row={row} add={add} edit={edit} remove={remove} cancel={cancel} />
             }
             {current && current === row && mode === PresentMode.Edit &&
               <RowEdit row={row} save={save} cancel={cancel} />

@@ -1,4 +1,11 @@
 .pageContainer {
     display: flex;
     flex-direction: column;
+    padding: 1em;
+    font-size: large;
+
+}
+
+.home {
+    align-self: flex-start;
 }

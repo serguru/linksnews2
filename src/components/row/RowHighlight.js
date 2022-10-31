@@ -1,12 +1,28 @@
-import "../../App.css";
 
-const RowHighlight = ({ row, add, edit, remove, cancel}) => {
-    return <div className="highlightedComponent">
-        <div>Row highlight {row.name}</div>
-        <button onClick={() => add()}>Add</button>
-        <button onClick={() => edit(row)}>Edit</button>
-        <button onClick={() => remove(row)}>Remove</button>
-        <button onClick={() => cancel()}>Cancel</button>
+
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import CancelPresentationRoundedIcon from '@mui/icons-material/CancelPresentationRounded';
+import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import "./Row.css";
+
+const RowHighlight = ({ row, add, edit, remove, cancel }) => {
+    return <div className='highlightContainer'>
+        <div>Row "{row.name}"</div>
+        <div className='iconsContainer'>
+            <div title="Add new row">
+                <AddCircleOutlineRoundedIcon onClick={() => add()} />
+            </div>
+            <div title="Edit row">
+                <EditRoundedIcon onClick={() => edit(row)} />
+            </div>
+            <div title="Remove row">
+                <RemoveCircleOutlineRoundedIcon onClick={() => remove(row)} />
+            </div>
+            <div title="Cancel editing">
+                <CancelPresentationRoundedIcon onClick={() => cancel()} />
+            </div>
+        </div>
     </div>
 }
 

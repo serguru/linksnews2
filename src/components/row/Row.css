@@ -1,4 +1,28 @@
 .rowContainer {
     display: flex;
     flex-direction: row;
+    padding-top: 0.5em;
+    flex-wrap: wrap;
+}
+
+.highlightContainer {
+    border: 2px dashed lightgrey;
+    border-radius: 0.5em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    align-items: center;
+}
+
+.iconsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0.5em;
+    align-self: center;
+}
+
+.tf {
+    max-width: 300px;
 }

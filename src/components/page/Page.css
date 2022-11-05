@@ -9,3 +9,7 @@
 .home {
     align-self: flex-start;
 }
+
+.pageRow {
+    padding-bottom: 1em;
+}

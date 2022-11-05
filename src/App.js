@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import './App.css'
 import Pages from './components/pages/Pages'
-import Login from './components/login/Login'
 import { readLogin } from './redux/login/loginActions'
 import {
   createBrowserRouter,
@@ -11,7 +10,9 @@ import {
 import ErrorPage from './components/error-page/error-page'
 import axios from 'axios'
 import store from './redux/store'
-import Page from './components/page/Page' 
+import Page from './components/page/Page'
+import { fetchAccount } from './redux/account/accountActions'
+
 
 axios.interceptors.request.use(
   config => {
@@ -37,21 +38,39 @@ const router = createBrowserRouter([
     path: "/page/:path",
     element: <Page />,
   },
-  {
-    path: "/login",
-    element: <Login />,
-  },
+
 ]);
 
 function App() {
 
   const dispatch = useDispatch();
 
-  dispatch(readLogin())
- 
+  useEffect(() => {
+
+    const select = (state) => {
+      return state.loginData.name
+    }
+
+    let current = "";
+    let previous = "";
+    const handleChange = () => {
+      previous = current;
+      current = select(store.getState())
+
+      if (previous !== current) {
+        fetchAccount()
+      }
+    }
+
+    store.subscribe(handleChange);
+    dispatch(readLogin());
+  }, [dispatch])
+
+
+
   return (
-    <div className='App'>
-        <RouterProvider router={router} />
+    <div>
+      <RouterProvider router={router} />
     </div>
   )
 }

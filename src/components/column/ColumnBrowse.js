@@ -81,12 +81,12 @@ const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current,
                 ))
             }
         </div>
-     : <div className="clickableElement" onClick={() => add()}>Add a link</div>
+     : <div className="clickableElement columnContainer" onClick={() => add()}>Add a link</div>
 
 
     return (
         <div>
-            <div className="clickableElement" onClick={() => select(column)} title="Click to edit">{column.name || "No name column"}</div>
+            <div className="clickableElement centerText" onClick={() => select(column)} title="Click to edit">{column.name || "No name column"}</div>
             {element}
         </div>
     )

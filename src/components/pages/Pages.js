@@ -65,33 +65,35 @@ const Pages = () => {
     setCurrentPage(undefined);
   }
 
-  return data.loading ? (
+  //return <h2>Loading</h2>
+
+  const element = data.loading ? (
     <h2>Loading</h2>
   ) : data.error ? (
     <h2>{data.error}</h2>
   ) : (
-    <div>
-      <div className="pagesContainer">
-        {
-          data.account?.pages.map(page => (
+    <div className="pagesContainer">
+      {
+        data.account?.pages?.map(page => (
 
-            <div className="pageLink" key={page.id}>
-              {(!currentPage || currentPage !== page) &&
-                <PageBrowse page={page} select={select}/>
-              }
-              {currentPage && currentPage === page && mode === PresentMode.Highlight &&
-                <PageHighlight page={page} add={add} edit={edit} remove={remove}  cancel={cancel}/>
-              }
-              {currentPage && currentPage === page && mode === PresentMode.Edit &&
-                <PageEdit page={page} save={save} cancel={cancel} />
-              }
-            </div>
-          ))
+          <div className="pageLink" key={page.id}>
+            {(!currentPage || currentPage !== page) &&
+              <PageBrowse page={page} select={select} />
+            }
+            {currentPage && currentPage === page && mode === PresentMode.Highlight &&
+              <PageHighlight page={page} add={add} edit={edit} remove={remove} cancel={cancel} />
+            }
+            {currentPage && currentPage === page && mode === PresentMode.Edit &&
+              <PageEdit page={page} save={save} cancel={cancel} />
+            }
+          </div>
+        ))
 
-        }
-      </div>
+      }
     </div>
-  )
+  );
+
+  return (<div className='container'>{element}</div>)
 }
 
 export default Pages;

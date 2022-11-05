@@ -1,6 +1,3 @@
- .App {
-  text-align: center;
-}
 
 .highlightedComponent {
   border: 2px dashed lightgrey;
@@ -10,3 +7,8 @@
 .clickableElement {
   cursor: pointer;
 }
+
+.centerText {
+  text-align: center;
+}
+

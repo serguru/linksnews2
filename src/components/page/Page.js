@@ -30,6 +30,9 @@ const Page = () => {
   }
 
   const add = () => {
+    if (!page) {
+      throw new Error("No page");
+    }
     const account = cloneAccount();
     const rows = account.pages.find(p => p.id === page.id).rows;
     rows.push({
@@ -48,6 +51,9 @@ const Page = () => {
   }
 
   const remove = (row) => {
+    if (!page) {
+      throw new Error("No page");
+    }
     const account = cloneAccount();
     const p = account.pages.find(p => p.id === page.id);
     const r = p.rows.find(x => x.id === row.id);
@@ -62,6 +68,9 @@ const Page = () => {
   }
 
   const save = (name) => {
+    if (!page) {
+      throw new Error("No page");
+    }
     const account = cloneAccount();
     const p = account.pages.find(x => x.id === page.id);
     const r = p.rows.find(x => x.id === current.id);
@@ -74,6 +83,11 @@ const Page = () => {
   const cancel = () => {
     setMode(undefined);
     setCurrent(undefined);
+  }
+
+  if (!page) {
+
+    return <div>Page not found</div>;
   }
 
   return page.rows.length > 0 ? (

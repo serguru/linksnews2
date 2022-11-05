@@ -7,22 +7,23 @@ const store = createStore(
   rootReducer
 )
 
-function select(state) {
-  return state.loginData.name
-}
+// const select = (state) => {
+//   return state.loginData.name
+// }
 
-let current
-function handleChange() {
-  let previous = current
-  current = select(store.getState())
+// let current = "";
+// let previous = "";
+// const handleChange = () => {
+//   previous = current;
+//   current = select(store.getState())
 
-  if (previous !== current) {
-//    store.dispatch(fetchAccount())
-    fetchAccount()
-  }
-}
+//   if (previous !== current) {
+//     //alert(`Current = ${current}, previous = ${previous}`);
+//     fetchAccount()
+//   }
+// }
 
-store.subscribe(handleChange)
+// store.subscribe(handleChange)
 
 
 

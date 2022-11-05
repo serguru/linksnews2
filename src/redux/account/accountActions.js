@@ -9,11 +9,12 @@ import {
 } from './accountTypes'
 import store from '../../redux/store'
 
-const apiUrl = 'https://localhost:7055/account';
-//const apiUrl = 'https://linksnews2api.azurewebsites.net/account';
+//const apiUrl = 'https://localhost:7055/account';
+const apiUrl = 'https://linksnews2api.azurewebsites.net/account';
 
 export const fetchAccount = () => {
-  store.dispatch(fetchAccountRequest())
+  store.dispatch(fetchAccountRequest());
+
   axios
     .get(apiUrl)
     .then(response => {

@@ -18,7 +18,7 @@ export const writeLogin = login => {
 }
 
 const read = () => {
-  const login = JSON.parse(localStorage.getItem('login') || {name: "", password: ""});
+  const login = JSON.parse(localStorage.getItem('login'));
   return login;
 }
 

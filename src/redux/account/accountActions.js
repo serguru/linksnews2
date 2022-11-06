@@ -12,25 +12,55 @@ import store from '../../redux/store'
 //const apiUrl = 'https://localhost:7055/account';
 const apiUrl = 'https://linksnews2api.azurewebsites.net/account';
 
+const getLoginStr = () => {
+  return localStorage.getItem('login');
+}
+
+const getLogin = () => {
+  const l = getLoginStr();
+  if (!l) {
+    return undefined
+  }
+  return JSON.parse(l);
+}
+
+const config = () => {
+  const l = getLoginStr();
+
+  if (!l) {
+    return undefined;
+  }
+
+  const result = {
+    'headers': {
+      'login': l
+    }
+  }
+
+  return result; 
+  
+
+}
+
 export const fetchAccount = () => {
 
-  const n = store.getState().loginData.name;
+  const c = config();
 
-  if (!n) {
-    store.dispatch(fetchAccountSuccess(undefined))
+  if (!c) {
+    store.dispatch(fetchAccountFailure("No account"))
     return;
   }
 
   store.dispatch(fetchAccountRequest());
   axios
-  .get(apiUrl)
-  .then(response => {
-    const account = response.data
-    store.dispatch(fetchAccountSuccess(account))
-  })
-  .catch(error => {
-    store.dispatch(fetchAccountFailure(error.message))
-  })
+    .get(apiUrl, c)
+    .then(response => {
+      const account = response.data;
+      store.dispatch(fetchAccountSuccess(account));
+    })
+    .catch(error => {
+      store.dispatch(fetchAccountFailure(error.message))
+    })
 
 }
 
@@ -55,9 +85,10 @@ export const fetchAccountFailure = error => {
 }
 
 export const updateAccount = (account) => {
-  store.dispatch(updateAccountRequest())
+  store.dispatch(updateAccountRequest());
+  const c = config();
   axios
-    .put(apiUrl, account)
+    .put(apiUrl, account, c)
     .then(response => {
       const account = response.data
       store.dispatch(updateAccountSuccess(account))

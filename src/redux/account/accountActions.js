@@ -13,17 +13,25 @@ import store from '../../redux/store'
 const apiUrl = 'https://linksnews2api.azurewebsites.net/account';
 
 export const fetchAccount = () => {
-  store.dispatch(fetchAccountRequest());
 
+  const n = store.getState().loginData.name;
+
+  if (!n) {
+    store.dispatch(fetchAccountSuccess(undefined))
+    return;
+  }
+
+  store.dispatch(fetchAccountRequest());
   axios
-    .get(apiUrl)
-    .then(response => {
-      const account = response.data
-      store.dispatch(fetchAccountSuccess(account))
-    })
-    .catch(error => {
-      store.dispatch(fetchAccountFailure(error.message))
-    })
+  .get(apiUrl)
+  .then(response => {
+    const account = response.data
+    store.dispatch(fetchAccountSuccess(account))
+  })
+  .catch(error => {
+    store.dispatch(fetchAccountFailure(error.message))
+  })
+
 }
 
 export const fetchAccountRequest = () => {
@@ -49,8 +57,8 @@ export const fetchAccountFailure = error => {
 export const updateAccount = (account) => {
   store.dispatch(updateAccountRequest())
   axios
-  .put(apiUrl, account)
-  .then(response => {
+    .put(apiUrl, account)
+    .then(response => {
       const account = response.data
       store.dispatch(updateAccountSuccess(account))
     })

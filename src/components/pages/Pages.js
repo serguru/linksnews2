@@ -74,21 +74,24 @@ const Pages = () => {
   ) : (
     <div className="pagesContainer">
       {
-        data.account?.pages?.map(page => (
+        data.account?.pages ? (
+          data.account.pages.map(page => (
 
-          <div className="pageLink" key={page.id}>
-            {(!currentPage || currentPage !== page) &&
-              <PageBrowse page={page} select={select} />
-            }
-            {currentPage && currentPage === page && mode === PresentMode.Highlight &&
-              <PageHighlight page={page} add={add} edit={edit} remove={remove} cancel={cancel} />
-            }
-            {currentPage && currentPage === page && mode === PresentMode.Edit &&
-              <PageEdit page={page} save={save} cancel={cancel} />
-            }
-          </div>
-        ))
-
+            <div className="pageLink" key={page.id}>
+              {(!currentPage || currentPage !== page) &&
+                <PageBrowse page={page} select={select} />
+              }
+              {currentPage && currentPage === page && mode === PresentMode.Highlight &&
+                <PageHighlight page={page} add={add} edit={edit} remove={remove} cancel={cancel} />
+              }
+              {currentPage && currentPage === page && mode === PresentMode.Edit &&
+                <PageEdit page={page} save={save} cancel={cancel} />
+              }
+            </div>
+          ))
+        ) : (
+          <h2>No pages for account {data.account?.name}</h2>
+        )
       }
     </div>
   );

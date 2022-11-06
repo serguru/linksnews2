@@ -65,8 +65,6 @@ const Pages = () => {
     setCurrentPage(undefined);
   }
 
-  //return <h2>Loading</h2>
-
   const element = data.loading ? (
     <h2>Loading</h2>
   ) : data.error ? (

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import './App.css'
 import Pages from './components/pages/Pages'
-import { readLogin } from './redux/login/loginActions'
 import {
   createBrowserRouter,
   RouterProvider
@@ -13,20 +12,6 @@ import store from './redux/store'
 import Page from './components/page/Page'
 import { fetchAccount } from './redux/account/accountActions'
 
-
-// axios.interceptors.request.use(
-//   config => {
-//     const login = store.getState().loginData;
-//     if (login && login.name && login.password) {
-//       const loginStr = JSON.stringify(login);
-//       config.headers['login'] = loginStr;
-//     }
-//     return config;
-//   },
-//   error => {
-//     return Promise.reject(error);
-//   }
-// );
 
 const router = createBrowserRouter([
   {
@@ -47,23 +32,8 @@ function App() {
 
   useEffect(() => {
 
-    const select = (state) => {
-      return state.loginData.name
-    }
+    fetchAccount();
 
-    let current = "";
-    let previous = "";
-    const handleChange = () => {
-      previous = current;
-      current = select(store.getState())
-
-      if (previous !== current) {
-        fetchAccount()
-      }
-    }
-
-    store.subscribe(handleChange);
-    dispatch(readLogin());
   }, [dispatch])
 
 

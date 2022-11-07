@@ -3,7 +3,7 @@ import "../../App.css"
 import LinkBrowse from '../link/LinkBrowse'
 import LinkEdit from '../link/LinkEdit'
 import LinkHighlight from '../link/LinkHighlight'
-import { PresentMode } from '../../helpers/enums';
+import { PresentMode, LayoutSection } from '../../helpers/enums';
 import { updateAccount } from '../../redux/account/accountActions';
 import { cloneAccount, addObject } from '../../helpers/utils';
 
@@ -21,7 +21,7 @@ const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current,
             name: "new link",
         };
         addObject(links, newLink, link,  before);
-        updateAccount(account);
+        updateAccount(account, setMode, setCurrent, LayoutSection.Link);
         setMode(undefined);
         setCurrent(undefined);
     }

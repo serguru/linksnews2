@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import "./Pages.css";
-import { PresentMode } from '../../helpers/enums';
+import { LayoutSection, PresentMode } from '../../helpers/enums';
 import PageEdit from './PageEdit';
 import PageBrowse from './PageBrowse';
 import PageHighlight from './PageHighlight';
@@ -29,7 +29,7 @@ const Pages = () => {
       rows: []
     };
     addObject(account.pages, newPage, page,  before);
-    updateAccount(account);
+    updateAccount(account, setMode, setCurrentPage, LayoutSection.Page);
     setMode(undefined);
     setCurrentPage(undefined);
   }

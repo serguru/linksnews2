@@ -6,7 +6,7 @@ import RowBrowse from "../row/RowBrowse";
 import RowEdit from "../row/RowEdit";
 import RowHighlight from "../row/RowHighlight";
 import { updateAccount } from '../../redux/account/accountActions';
-import { PresentMode } from '../../helpers/enums';
+import { PresentMode, LayoutSection } from '../../helpers/enums';
 import { cloneAccount, addObject } from '../../helpers/utils';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useNavigate } from "react-router-dom";
@@ -37,7 +37,7 @@ const Page = () => {
       columns: []
     };
     addObject(rows, newRow, row,  before);
-    updateAccount(account);
+    updateAccount(account, setMode, setCurrent, LayoutSection.Row);
     setMode(undefined);
     setCurrent(undefined);
   }

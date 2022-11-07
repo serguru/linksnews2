@@ -1,4 +1,5 @@
 import store from '../redux/store';
+import { LayoutSection } from './enums';
 
 export const cloneAccount = () => {
   return JSON.parse(JSON.stringify(store.getState().accountData.account));
@@ -50,4 +51,46 @@ export const addObject = (objects, newObj, selectedObj = null, before = true) =>
     index++;
   }
   objects.splice(index, 0, newObj);
+}
+
+export const findNewLayoutSection = (account, section) => {
+
+  if (section === LayoutSection.Page) {
+    return account.pages.find(x => x.name === 'new page')
+  }
+
+  for (let i = 0; i < account.pages.length; i++) {
+    const page = account.pages[i];
+    if (section === LayoutSection.Row) {
+      const result = page.rows.find(x => x.name === 'new row');
+      if (result) {
+        return result;
+      }
+      continue;
+    }
+
+    for (let j = 0; j < page.rows.length; j++) {
+      const row = page.rows[j];
+      if (section === LayoutSection.Column) {
+        const result = row.columns.find(x => x.name === 'new column')
+        if (result) {
+          return result;
+        }
+        continue;
+      }
+  
+      for (let k = 0; k < row.columns.length; k++) {
+        const column = row.columns[k];
+        if (section === LayoutSection.Link) {
+          const result = column.links.find(x => x.name === 'new link')
+          if (result) {
+            return result;
+          }
+        }
+      }
+    }
+  }
+
+  return null;
+
 }

@@ -3,7 +3,7 @@ import "../../App.css"
 import ColumnBrowse from '../column/ColumnBrowse'
 import ColumnEdit from '../column/ColumnEdit'
 import ColumnHighlight from '../column/ColumnHighlight'
-import { PresentMode } from '../../helpers/enums';
+import { PresentMode, LayoutSection } from '../../helpers/enums';
 import { updateAccount } from '../../redux/account/accountActions';
 import { cloneAccount, addObject } from '../../helpers/utils';
 
@@ -20,7 +20,7 @@ const RowBrowse = ({ page, row, select, setMode, setCurrent, current, mode }) =>
             links: []
         };
         addObject(columns, newColumn, column,  before);
-        updateAccount(account);
+        updateAccount(account, setMode, setCurrent, LayoutSection.Column);
         setMode(undefined);
         setCurrent(undefined);
     }

@@ -5,21 +5,22 @@ import LinkEdit from '../link/LinkEdit'
 import LinkHighlight from '../link/LinkHighlight'
 import { PresentMode } from '../../helpers/enums';
 import { updateAccount } from '../../redux/account/accountActions';
-import { cloneAccount } from '../../helpers/utils';
+import { cloneAccount, addObject } from '../../helpers/utils';
 
 
 const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current, mode }) => {
 
-    const add = () => {
+    const add = (link = null, before = true) => {
         const account = cloneAccount();
         const rows =  account.pages.find(p => p.id === page.id).rows;
         const columns = rows.find(p => p.id === row.id).columns;
         const links = columns.find(x => x.id === column.id).links;
-        links.push({
+        const newLink = {
             id: "",
             url: "",
             name: "new link",
-        })
+        };
+        addObject(links, newLink, link,  before);
         updateAccount(account);
         setMode(undefined);
         setCurrent(undefined);

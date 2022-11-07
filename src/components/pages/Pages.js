@@ -6,7 +6,7 @@ import PageEdit from './PageEdit';
 import PageBrowse from './PageBrowse';
 import PageHighlight from './PageHighlight';
 import { updateAccount } from '../../redux/account/accountActions';
-import { cloneAccount } from '../../helpers/utils';
+import { cloneAccount, addObject } from '../../helpers/utils';
 
 const Pages = () => {
 
@@ -20,14 +20,15 @@ const Pages = () => {
     setCurrentPage(page);
   }
 
-  const add = () => {
+  const add = (page = null, before = true) => {
     const account = cloneAccount();
-    account.pages.push({
+    const newPage = {
       id: "",
       name: "new page",
       path: "newpage",
       rows: []
-    })
+    };
+    addObject(account.pages, newPage, page,  before);
     updateAccount(account);
     setMode(undefined);
     setCurrentPage(undefined);

@@ -5,20 +5,21 @@ import ColumnEdit from '../column/ColumnEdit'
 import ColumnHighlight from '../column/ColumnHighlight'
 import { PresentMode } from '../../helpers/enums';
 import { updateAccount } from '../../redux/account/accountActions';
-import { cloneAccount } from '../../helpers/utils';
+import { cloneAccount, addObject } from '../../helpers/utils';
 
 
 const RowBrowse = ({ page, row, select, setMode, setCurrent, current, mode }) => {
 
-    const add = () => {
+    const add = (column = null, before = true) => {
         const account = cloneAccount();
         const rows = account.pages.find(p => p.id === page.id).rows;
         const columns = rows.find(x => x.id === row.id).columns;
-        columns.push({
+        const newColumn = {
             id: "",
             name: "new column",
             links: []
-        })
+        };
+        addObject(columns, newColumn, column,  before);
         updateAccount(account);
         setMode(undefined);
         setCurrent(undefined);

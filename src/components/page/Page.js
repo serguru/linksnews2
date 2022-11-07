@@ -7,7 +7,7 @@ import RowEdit from "../row/RowEdit";
 import RowHighlight from "../row/RowHighlight";
 import { updateAccount } from '../../redux/account/accountActions';
 import { PresentMode } from '../../helpers/enums';
-import { cloneAccount } from '../../helpers/utils';
+import { cloneAccount, addObject } from '../../helpers/utils';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useNavigate } from "react-router-dom";
 
@@ -25,17 +25,18 @@ const Page = () => {
     setCurrent(obj);
   }
 
-  const add = () => {
+  const add = (row = null, before = true) => {
     if (!page) {
       throw new Error("No page");
     }
     const account = cloneAccount();
     const rows = account.pages.find(p => p.id === page.id).rows;
-    rows.push({
+    const newRow = {
       id: "",
       name: "new row",
       columns: []
-    })
+    };
+    addObject(rows, newRow, row,  before);
     updateAccount(account);
     setMode(undefined);
     setCurrent(undefined);

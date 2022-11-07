@@ -18,11 +18,27 @@ export const fetchAccount = () => {
     return;
   }
 
+  let counter = 0;
+
   store.dispatch(fetchAccountRequest());
   axios
     .get(apiUrl, c)
     .then(response => {
       const account = response.data;
+      if (!account) {
+
+        // For the very first call Azure can return an empty response
+        // eve though an account was found in the DB
+        if (counter === 0)
+        {
+          counter++;
+          fetchAccount();
+          return;
+        }
+
+        store.dispatch(fetchAccountFailure(`No account fetched for ${JSON.stringify(c)}`));
+        return;
+      }
       store.dispatch(fetchAccountSuccess(account));
     })
     .catch(error => {

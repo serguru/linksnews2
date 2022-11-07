@@ -4,7 +4,7 @@ export const cloneAccount = () => {
     return JSON.parse(JSON.stringify(store.getState().accountData.account));
   }
 
-//const apiUrl = 'https://localhost:7055/account';
+//export const apiUrl = 'https://localhost:7055/account';
 export const apiUrl = 'https://linksnews2api.azurewebsites.net/account';
 
 export const getLoginStr = () => {

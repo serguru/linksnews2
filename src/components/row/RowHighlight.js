@@ -20,8 +20,8 @@ const RowHighlight = ({ row, add, edit, remove, cancel }) => {
             <div title="Edit row">
                 <EditRoundedIcon onClick={() => edit(row)} />
             </div>
-            <div title="Remove row">
-                <RemoveCircleOutlineRoundedIcon onClick={() => remove(row)} />
+            <div title="Remove row (Ctrl+click)">
+                <RemoveCircleOutlineRoundedIcon onClick={(e) => remove(row,e)} />
             </div>
             <div title="Cancel editing">
                 <CancelPresentationRoundedIcon onClick={() => cancel()} />

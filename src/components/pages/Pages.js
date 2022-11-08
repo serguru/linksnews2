@@ -40,7 +40,10 @@ const Pages = () => {
     setCurrentPage(page);
   }
 
-  const remove = (page) => {
+  const remove = (page, e) => {
+    if (!e.ctrlKey) {
+      return;
+    }
     const account = cloneAccount();
     const index = account.pages.indexOf(account.pages.find(x => x.id === page.id));
     if (index < 0) {

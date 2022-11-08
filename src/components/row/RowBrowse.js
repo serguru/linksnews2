@@ -30,8 +30,11 @@ const RowBrowse = ({ page, row, select, setMode, setCurrent, current, mode }) =>
         setCurrent(column);
     }
 
-    const remove = (column) => {
-        const account = cloneAccount();
+    const remove = (column, e) => {
+        if (!e.ctrlKey) {
+            return;
+          }
+              const account = cloneAccount();
         const p = account.pages.find(p => p.id === page.id);
         const r = p.rows.find(x => x.id === row.id);
         const c = r.columns.find(x => x.id === column.id);

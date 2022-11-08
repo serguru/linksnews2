@@ -18,8 +18,8 @@ const PageHighlight = ({ page, add, edit, remove, cancel }) => {
             <div title="Edit page">
                 <EditRoundedIcon onClick={() => edit(page)} />
             </div>
-            <div title="Remove page">
-                <RemoveCircleOutlineRoundedIcon onClick={() => remove(page)} />
+            <div title="Remove page (Ctrl+click)">
+                <RemoveCircleOutlineRoundedIcon onClick={(e) => remove(page,e)} />
             </div>
             <div title="Cancel editing">
                 <CancelPresentationRoundedIcon onClick={() => cancel()} />

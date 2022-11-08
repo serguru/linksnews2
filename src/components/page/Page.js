@@ -37,7 +37,7 @@ const Page = () => {
       name: "new row",
       columns: []
     };
-    addObject(rows, newRow, row,  before);
+    addObject(rows, newRow, row, before);
     updateAccount(account, setMode, setCurrent, LayoutSection.Row, newRow.id);
     setMode(undefined);
     setCurrent(undefined);
@@ -48,7 +48,10 @@ const Page = () => {
     setCurrent(row);
   }
 
-  const remove = (row) => {
+  const remove = (row, e) => {
+    if (!e.ctrlKey) {
+      return;
+    }
     if (!page) {
       throw new Error("No page");
     }
@@ -118,7 +121,7 @@ const Page = () => {
     <h2>No page</h2>
   );
 
-  return (<div className='container'>{ element }</div>);
+  return (<div className='container'>{element}</div>);
 
 
 }

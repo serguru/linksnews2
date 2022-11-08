@@ -18,8 +18,8 @@ const ColumnHighlight = ({ column, add, edit, remove, cancel }) => {
             <div title="Edit column">
                 <EditRoundedIcon onClick={() => edit(column)} />
             </div>
-            <div title="Remove column">
-                <RemoveCircleOutlineRoundedIcon onClick={() => remove(column)} />
+            <div title="Remove column (Ctrl+click)">
+                <RemoveCircleOutlineRoundedIcon onClick={(e) => remove(column, e)} />
             </div>
             <div title="Cancel editing">
                 <CancelPresentationRoundedIcon onClick={() => cancel()} />

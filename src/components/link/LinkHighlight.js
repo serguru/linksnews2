@@ -18,8 +18,8 @@ const LinkHighlight = ({ link, add, edit, remove, cancel }) => {
             <div title="Edit link">
                 <EditRoundedIcon onClick={() => edit(link)} />
             </div>
-            <div title="Remove link">
-                <RemoveCircleOutlineRoundedIcon onClick={() => remove(link)} />
+            <div title="Remove link (Ctrl+click)">
+                <RemoveCircleOutlineRoundedIcon onClick={(e) => remove(link, e)} />
             </div>
             <div title="Cancel editing">
                 <CancelPresentationRoundedIcon onClick={() => cancel()} />

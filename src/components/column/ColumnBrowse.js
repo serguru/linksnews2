@@ -6,7 +6,7 @@ import LinkHighlight from '../link/LinkHighlight'
 import { PresentMode, LayoutSection } from '../../helpers/enums';
 import { updateAccount } from '../../redux/account/accountActions';
 import { cloneAccount, addObject } from '../../helpers/utils';
-
+import { v4 as uuidv4 } from 'uuid';
 
 const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current, mode }) => {
 
@@ -16,12 +16,12 @@ const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current,
         const columns = rows.find(p => p.id === row.id).columns;
         const links = columns.find(x => x.id === column.id).links;
         const newLink = {
-            id: "",
+            id: uuidv4(),
             url: "",
             name: "new link",
         };
         addObject(links, newLink, link,  before);
-        updateAccount(account, setMode, setCurrent, LayoutSection.Link);
+        updateAccount(account, setMode, setCurrent, LayoutSection.Link, newLink.id);
         setMode(undefined);
         setCurrent(undefined);
     }

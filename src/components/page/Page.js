@@ -10,6 +10,7 @@ import { PresentMode, LayoutSection } from '../../helpers/enums';
 import { cloneAccount, addObject } from '../../helpers/utils';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 const Page = () => {
 
@@ -32,12 +33,12 @@ const Page = () => {
     const account = cloneAccount();
     const rows = account.pages.find(p => p.id === page.id).rows;
     const newRow = {
-      id: "",
+      id: uuidv4(),
       name: "new row",
       columns: []
     };
     addObject(rows, newRow, row,  before);
-    updateAccount(account, setMode, setCurrent, LayoutSection.Row);
+    updateAccount(account, setMode, setCurrent, LayoutSection.Row, newRow.id);
     setMode(undefined);
     setCurrent(undefined);
   }

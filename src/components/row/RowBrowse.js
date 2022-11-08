@@ -6,7 +6,7 @@ import ColumnHighlight from '../column/ColumnHighlight'
 import { PresentMode, LayoutSection } from '../../helpers/enums';
 import { updateAccount } from '../../redux/account/accountActions';
 import { cloneAccount, addObject } from '../../helpers/utils';
-
+import { v4 as uuidv4 } from 'uuid';
 
 const RowBrowse = ({ page, row, select, setMode, setCurrent, current, mode }) => {
 
@@ -15,12 +15,12 @@ const RowBrowse = ({ page, row, select, setMode, setCurrent, current, mode }) =>
         const rows = account.pages.find(p => p.id === page.id).rows;
         const columns = rows.find(x => x.id === row.id).columns;
         const newColumn = {
-            id: "",
+            id: uuidv4(),
             name: "new column",
             links: []
         };
         addObject(columns, newColumn, column,  before);
-        updateAccount(account, setMode, setCurrent, LayoutSection.Column);
+        updateAccount(account, setMode, setCurrent, LayoutSection.Column, newColumn.id);
         setMode(undefined);
         setCurrent(undefined);
     }

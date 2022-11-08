@@ -68,7 +68,7 @@ export const fetchAccountFailure = error => {
   }
 }
 
-export const updateAccount = (account, setMode = null, setCurrent = null, layoutSection = null) => {
+export const updateAccount = (account, setMode = null, setCurrent = null, layoutSection = null, id = null) => {
 
   const c = config();
   if (!c) {
@@ -82,7 +82,7 @@ export const updateAccount = (account, setMode = null, setCurrent = null, layout
     .then(response => {
       const account = response.data;
       if (setCurrent) {
-        const obj = findNewLayoutSection(account, layoutSection);
+        const obj = findNewLayoutSection(account, layoutSection, id);
         if (obj) {
           setCurrent(obj);
           setMode(PresentMode.Edit);

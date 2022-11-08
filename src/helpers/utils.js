@@ -53,16 +53,16 @@ export const addObject = (objects, newObj, selectedObj = null, before = true) =>
   objects.splice(index, 0, newObj);
 }
 
-export const findNewLayoutSection = (account, section) => {
+export const findNewLayoutSection = (account, section, id) => {
 
   if (section === LayoutSection.Page) {
-    return account.pages.find(x => x.name === 'new page')
+    return account.pages.find(x => x.id === id)
   }
 
   for (let i = 0; i < account.pages.length; i++) {
     const page = account.pages[i];
     if (section === LayoutSection.Row) {
-      const result = page.rows.find(x => x.name === 'new row');
+      const result = page.rows.find(x => x.id === id);
       if (result) {
         return result;
       }
@@ -72,7 +72,7 @@ export const findNewLayoutSection = (account, section) => {
     for (let j = 0; j < page.rows.length; j++) {
       const row = page.rows[j];
       if (section === LayoutSection.Column) {
-        const result = row.columns.find(x => x.name === 'new column')
+        const result = row.columns.find(x => x.id === id)
         if (result) {
           return result;
         }
@@ -82,7 +82,7 @@ export const findNewLayoutSection = (account, section) => {
       for (let k = 0; k < row.columns.length; k++) {
         const column = row.columns[k];
         if (section === LayoutSection.Link) {
-          const result = column.links.find(x => x.name === 'new link')
+          const result = column.links.find(x => x.id === id)
           if (result) {
             return result;
           }

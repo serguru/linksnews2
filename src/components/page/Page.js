@@ -86,10 +86,11 @@ const Page = () => {
     setCurrent(undefined);
   }
 
+
   const element = data.loading ? (
-    <h2>Loading</h2>
+    <div className="messageContainer"><h2>Loading</h2></div>
   ) : data.error ? (
-    <h2>{data.error}</h2>
+    <div className="messageContainer"><h2>{data.error}</h2></div>
   ) : page ? (
 
     page.rows.length > 0 ? (
@@ -114,14 +115,14 @@ const Page = () => {
         }
       </div>
     ) : (
-      <div className="clickableElement" onClick={() => add()}>Add a row</div>
+      <div className="clickableElement messageContainer" onClick={() => add()}>Add a row</div>
     )
 
   ) : (
-    <h2>No page</h2>
+    <div className="pageContainer"><h2>No page</h2></div>
   );
 
-  return (<div className='container'>{element}</div>);
+  return (<div>{element}</div>);
 
 
 }

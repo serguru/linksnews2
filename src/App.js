@@ -7,8 +7,6 @@ import {
   RouterProvider
 } from "react-router-dom";
 import ErrorPage from './components/error-page/error-page'
-import axios from 'axios'
-import store from './redux/store'
 import Page from './components/page/Page'
 import { fetchAccount } from './redux/account/accountActions'
 
@@ -39,9 +37,7 @@ function App() {
 
 
   return (
-    <div>
       <RouterProvider router={router} />
-    </div>
   )
 }
 

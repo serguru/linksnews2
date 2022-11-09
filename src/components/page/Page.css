@@ -1,9 +1,14 @@
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .pageContainer {
     display: flex;
     flex-direction: column;
     padding: 1em;
     font-size: large;
-    width: 100%;
 }
 
 .home {

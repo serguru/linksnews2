@@ -1,8 +1,13 @@
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .pagesContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
 }
 
 .pageLink {
@@ -30,8 +35,3 @@
     padding-top: 1em;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}

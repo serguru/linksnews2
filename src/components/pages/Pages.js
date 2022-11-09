@@ -71,9 +71,9 @@ const Pages = () => {
   }
 
   const element = data.loading ? (
-    <h2>Loading</h2>
+    <div className="messageContainer"><h2>Loading</h2></div>
   ) : data.error ? (
-    <h2>{data.error}</h2>
+    <div className="messageContainer"><h2>{data.error}</h2></div>
   ) : (
     <div className="pagesContainer">
       {
@@ -99,7 +99,8 @@ const Pages = () => {
     </div>
   );
 
-  return (<div className='container'>{element}</div>)
+//  return (<div className='container'>{element}</div>)
+  return (<div>{element}</div>)
 }
 
 export default Pages;

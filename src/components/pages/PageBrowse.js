@@ -1,17 +1,7 @@
-import { Link } from "react-router-dom";
 
-const PageBrowse = ({ page, select }) => {
-
-    const click = (e) => {
-        if (!e.ctrlKey) {
-            return;
-        }
-        e.preventDefault();
-        select(page);
-    }
-
-    return <div>
-        <Link to={"page/" + page.path} onClick={(e) => click(e)} title="Ctrl+click to edit">{page.name}</Link>
+const PageBrowse = ({ page, click }) => {
+    return <div className="clickableElement" onClick={(e) => click(e, page)} title="Ctrl+click to edit">
+        {page.name}
     </div>
 }
 

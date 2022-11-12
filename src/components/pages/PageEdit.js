@@ -7,18 +7,12 @@ import CancelPresentationRoundedIcon from '@mui/icons-material/CancelPresentatio
 const PageEdit = ({ page, save, cancel }) => {
 
     const [name, setName] = useState(page.name);
-    const [path, setPath] = useState(page.path);
 
     return <div className="highlightContainer">
         <TextField id="name" label="Name" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} />
-        <div className="tf">
-            <TextField id="path" label="Path" variant="outlined" value={path} onChange={(e) => setPath(e.target.value)} />
-        </div>
-
-
         <div className='iconsContainer'>
             <div title="Submit changes">
-                <BackupRoundedIcon onClick={() => save(name, path)} />
+                <BackupRoundedIcon onClick={() => save(name)} />
             </div>
             <div title="Cancel editing">
                 <CancelPresentationRoundedIcon onClick={() => cancel()} />

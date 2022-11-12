@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import "./Page.css"
-import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux";
 import RowBrowse from "../row/RowBrowse";
 import RowEdit from "../row/RowEdit";
@@ -8,16 +7,12 @@ import RowHighlight from "../row/RowHighlight";
 import { updateAccount } from '../../redux/account/accountActions';
 import { PresentMode, LayoutSection } from '../../helpers/enums';
 import { cloneAccount, addObject } from '../../helpers/utils';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 
-const Page = () => {
+const Page = (props) => {
 
-  const navigate = useNavigate();
   const data = useSelector(state => state.accountData);
-  const { path } = useParams();
-  const page = data.account?.pages?.find(x => x.path === path);
+  const page = data.account?.pages?.find(x => x.id === props.page.id);
   const [current, setCurrent] = useState();
   const [mode, setMode] = useState();
 
@@ -27,9 +22,6 @@ const Page = () => {
   }
 
   const add = (row = null, before = true) => {
-    if (!page) {
-      throw new Error("No page");
-    }
     const account = cloneAccount();
     const rows = account.pages.find(p => p.id === page.id).rows;
     const newRow = {
@@ -52,9 +44,6 @@ const Page = () => {
     if (!e.ctrlKey) {
       return;
     }
-    if (!page) {
-      throw new Error("No page");
-    }
     const account = cloneAccount();
     const p = account.pages.find(p => p.id === page.id);
     const r = p.rows.find(x => x.id === row.id);
@@ -69,9 +58,6 @@ const Page = () => {
   }
 
   const save = (name) => {
-    if (!page) {
-      throw new Error("No page");
-    }
     const account = cloneAccount();
     const p = account.pages.find(x => x.id === page.id);
     const r = p.rows.find(x => x.id === current.id);
@@ -91,13 +77,9 @@ const Page = () => {
     <div className="messageContainer"><h2>Loading</h2></div>
   ) : data.error ? (
     <div className="messageContainer"><h2>{data.error}</h2></div>
-  ) : page ? (
-
+  ) : (
     page.rows.length > 0 ? (
       <div className="pageContainer">
-        <div className="clickableElement home">
-          <HomeRoundedIcon onClick={() => navigate("/")} />
-        </div>
         {
           page.rows.map(row => (
             <div className="pageRow" key={row.id}>
@@ -117,9 +99,6 @@ const Page = () => {
     ) : (
       <div className="clickableElement messageContainer" onClick={() => add()}>Add a row</div>
     )
-
-  ) : (
-    <div className="pageContainer"><h2>No page</h2></div>
   );
 
   return (<div>{element}</div>);

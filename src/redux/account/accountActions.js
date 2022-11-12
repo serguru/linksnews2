@@ -77,7 +77,7 @@ export const updateAccount = (account, setMode = null, setCurrent = null, layout
   }
 
   store.dispatch(updateAccountRequest());
-  axios
+  return axios
     .put(apiUrl, account, c)
     .then(response => {
       const account = response.data;
@@ -89,6 +89,7 @@ export const updateAccount = (account, setMode = null, setCurrent = null, layout
         }
       }
       store.dispatch(updateAccountSuccess(account));
+      return account;
     })
     .catch(error => {
       store.dispatch(updateAccountFailure(error.message))

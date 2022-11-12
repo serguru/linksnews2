@@ -5,11 +5,10 @@
         {
             "id": "c340d49c-1c05-4d30-b6bf-5972fba9684e",
             "name": "Главное",
-            "path": "main",
             "rows": [
                 {
                     "id": "840a78fa-9b55-4a40-bfb7-862d557918b0",
-                    "name": "Everyday",
+                    "name": "Главное",
                     "columns": [
                         {
                             "id": "1d51e565-e920-4915-9596-4703381f9038",
@@ -19,6 +18,16 @@
                                     "id": "3146e663-e37d-4dce-acb1-6e830fe1fa40",
                                     "url": "https://mail.google.com",
                                     "name": "Gmail"
+                                },
+                                {
+                                    "id": "82711e90-afa6-45d8-84e9-3210c668d0c7",
+                                    "url": "https://contacts.google.com/?hl=en&tab=mC",
+                                    "name": "Contacts"
+                                },
+                                {
+                                    "id": "48234630-fc27-4bcb-b67e-f2b04b83243f",
+                                    "url": "https://calendar.google.com/calendar",
+                                    "name": "Calendar"
                                 },
                                 {
                                     "id": "b655668b-382d-4a70-9375-756a430a4dda",
@@ -108,6 +117,17 @@
                                     "name": "Telegram"
                                 }
                             ]
+                        },
+                        {
+                            "id": "082017fe-2c90-4216-b784-108b34e3a8dc",
+                            "name": "Local",
+                            "links": [
+                                {
+                                    "id": "30775bf1-a9e0-4228-9743-4b8fc0faab6c",
+                                    "url": "http://10.0.0.137:4444/storage",
+                                    "name": "Файлы на телефоне"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -116,11 +136,10 @@
         {
             "id": "70049314-d098-4799-9c71-b202827e6944",
             "name": "Instantel",
-            "path": "instantel",
             "rows": [
                 {
                     "id": "5ac228c6-3adb-4546-b71c-f23a16288d90",
-                    "name": "Instantel",
+                    "name": "",
                     "columns": [
                         {
                             "id": "8fcf2c67-c4dd-4f00-b5e8-52a5562c3627",
@@ -159,7 +178,17 @@
                                 {
                                     "id": "d6b2dbaa-6014-4f67-9611-0c6c767bf25d",
                                     "url": "https://securitases.okta.com/",
-                                    "name": "securitas okta"
+                                    "name": "Securitas okta"
+                                },
+                                {
+                                    "id": "cd069f85-c2b2-4b69-8071-1e594b9baa05",
+                                    "url": "https://securitas.workplace.com/",
+                                    "name": "Securitas Workplace"
+                                },
+                                {
+                                    "id": "1009bf0b-4a22-4bb8-8bbb-3e062bae436d",
+                                    "url": "https://securitases.freshservice.com/",
+                                    "name": "Securitas IT Helpdesk"
                                 }
                             ]
                         },
@@ -183,6 +212,17 @@
                                     "name": "do not sleep script"
                                 }
                             ]
+                        },
+                        {
+                            "id": "2432b799-0630-432d-8dc7-c90cd933644c",
+                            "name": "Documents",
+                            "links": [
+                                {
+                                    "id": "fd47f82f-2285-425b-818a-fc851b47f6a8",
+                                    "url": "https://app.hellosign.com/sign/2d7c917d2f96763a108424f55cd3f52d4d116a5c",
+                                    "name": "Disclosure form"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -191,11 +231,10 @@
         {
             "id": "6cd68c09-6425-4950-9d93-b1c945ffe74b",
             "name": "Software development",
-            "path": "softwaredevelopment",
             "rows": [
                 {
                     "id": "e38a1cf0-8a31-4d4c-b5b1-450c6d75d767",
-                    "name": "Software development",
+                    "name": "",
                     "columns": [
                         {
                             "id": "296d1aaa-600e-4d42-8cb7-7f736df19bcd",
@@ -245,7 +284,7 @@
                                 },
                                 {
                                     "id": "c857c72f-04b7-4c1e-9b1f-b097507f4273",
-                                    "url": "https://dev.azure.com/Instantel/Vision/_workitems/recentlyupdated/",
+                                    "url": "https://dev.azure.com/Instantel/Vision/_workitems/assignedtome/",
                                     "name": "Dev"
                                 }
                             ]
@@ -286,6 +325,32 @@
                                     "name": "Exclude files from tracking"
                                 }
                             ]
+                        },
+                        {
+                            "id": "9f708e5b-1143-47fd-8cb7-90604c35bedf",
+                            "name": "React forms",
+                            "links": [
+                                {
+                                    "id": "2aa773fc-3aef-405c-a269-18b992b8afc8",
+                                    "url": "https://react-hook-form.com/",
+                                    "name": "React Hook Form home"
+                                },
+                                {
+                                    "id": "c6d53e72-8a5f-420b-b96c-a7f716ba3769",
+                                    "url": "https://github.com/react-hook-form/react-hook-form/tree/master/examples",
+                                    "name": "React Hook Form examples Git "
+                                },
+                                {
+                                    "id": "a0576baa-fc72-48d4-9f0c-e598eb3174cd",
+                                    "url": "https://www.youtube.com/watch?v=DN8v7_RbVlc&list=PL03g4H_exuTppOgtY-45oWvN79rvJIKzf",
+                                    "name": "React Hook Form V7 tutorial"
+                                },
+                                {
+                                    "id": "176b9c95-05f3-4c42-ac31-93d493fb5d52",
+                                    "url": "https://www.youtube.com/watch?v=RkXv4AXXC_4",
+                                    "name": "Updated intro"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -293,8 +358,7 @@
         },
         {
             "id": "fe27fb07-709f-4e25-97d0-6118b56fadf7",
-            "name": "Кулинарные изыски",
-            "path": "cooking",
+            "name": "Кулинария",
             "rows": [
                 {
                     "id": "67139118-83f4-4a30-80df-d41e8ad91026",
@@ -366,7 +430,6 @@
         {
             "id": "c2f6a708-887e-496e-8e2d-f25c8aa79b1a",
             "name": "Youtube",
-            "path": "youtube",
             "rows": [
                 {
                     "id": "214deab9-ec94-42e6-89f6-e779d3c3405e",
@@ -452,6 +515,11 @@
                                     "id": "97b4c4a8-1663-47c1-a53d-aedc2d7cec56",
                                     "url": "https://www.youtube.com/c/RTVIchannel",
                                     "name": "RTVI"
+                                },
+                                {
+                                    "id": "c3ce0f00-8cc1-4ec1-a340-fb78d42e3034",
+                                    "url": "",
+                                    "name": "new link"
                                 }
                             ]
                         },
@@ -489,7 +557,7 @@
     ],
     "_rid": "-iZPAKbwyogDAAAAAAAAAA==",
     "_self": "dbs/-iZPAA==/colls/-iZPAKbwyog=/docs/-iZPAKbwyogDAAAAAAAAAA==/",
-    "_etag": "\"fb04ca0c-0000-0700-0000-636b463d0000\"",
+    "_etag": "\"070500b7-0000-0700-0000-636dd84b0000\"",
     "_attachments": "attachments/",
-    "_ts": 1667974717
+    "_ts": 1668143179
 }

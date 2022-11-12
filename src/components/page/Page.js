@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./Page.css"
 import { useSelector } from "react-redux";
 import RowBrowse from "../row/RowBrowse";
@@ -9,12 +9,9 @@ import { PresentMode, LayoutSection } from '../../helpers/enums';
 import { cloneAccount, addObject } from '../../helpers/utils';
 import { v4 as uuidv4 } from 'uuid';
 
-const Page = (props) => {
+const Page = ({ page, setMode, setCurrent, current, mode }) => {
 
   const data = useSelector(state => state.accountData);
-  const page = data.account?.pages?.find(x => x.id === props.page.id);
-  const [current, setCurrent] = useState();
-  const [mode, setMode] = useState();
 
   const select = (obj) => {
     setMode(PresentMode.Highlight);
@@ -30,9 +27,9 @@ const Page = (props) => {
       columns: []
     };
     addObject(rows, newRow, row, before);
-    updateAccount(account, setMode, setCurrent, LayoutSection.Row, newRow.id);
     setMode(undefined);
     setCurrent(undefined);
+    updateAccount(account, setMode, setCurrent, LayoutSection.Row, newRow.id);
   }
 
   const edit = (row) => {
@@ -72,13 +69,12 @@ const Page = (props) => {
     setCurrent(undefined);
   }
 
-
   const element = data.loading ? (
     <div className="messageContainer"><h2>Loading</h2></div>
   ) : data.error ? (
     <div className="messageContainer"><h2>{data.error}</h2></div>
   ) : (
-    page.rows.length > 0 ? (
+    page?.rows.length > 0 ? (
       <div className="pageContainer">
         {
           page.rows.map(row => (

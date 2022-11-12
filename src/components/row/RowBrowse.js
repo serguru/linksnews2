@@ -20,9 +20,9 @@ const RowBrowse = ({ page, row, select, setMode, setCurrent, current, mode }) =>
             links: []
         };
         addObject(columns, newColumn, column,  before);
-        updateAccount(account, setMode, setCurrent, LayoutSection.Column, newColumn.id);
         setMode(undefined);
         setCurrent(undefined);
+        updateAccount(account, setMode, setCurrent, LayoutSection.Column, newColumn.id);
     }
 
     const edit = (column) => {

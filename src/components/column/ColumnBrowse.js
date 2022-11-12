@@ -21,9 +21,9 @@ const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current,
             name: "new link",
         };
         addObject(links, newLink, link,  before);
-        updateAccount(account, setMode, setCurrent, LayoutSection.Link, newLink.id);
         setMode(undefined);
         setCurrent(undefined);
+        updateAccount(account, setMode, setCurrent, LayoutSection.Link, newLink.id);
     }
 
     const edit = (link) => {

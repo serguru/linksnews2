@@ -15,7 +15,7 @@ const Pages = () => {
 
   const data = useSelector(state => state.accountData)
 
-  const [currentPage, setCurrentPage] = useState();
+  const [current, setCurrent] = useState();
   const [selectedPage, setSelectedPage] = useState();
   const [mode, setMode] = useState();
 
@@ -37,14 +37,14 @@ const Pages = () => {
       rows: []
     };
     addObject(account.pages, newPage, page, before);
-    updateAccount(account, setMode, setCurrentPage, LayoutSection.Page, newPage.id);
     setMode(undefined);
-    setCurrentPage(undefined);
+    setCurrent(undefined);
+    updateAccount(account, setMode, setCurrent, LayoutSection.Page, newPage.id);
   }
 
   const edit = (page) => {
     setMode(PresentMode.Edit);
-    setCurrentPage(page);
+    setCurrent(page);
   }
 
   const remove = (page, e) => {
@@ -59,21 +59,21 @@ const Pages = () => {
     account.pages.splice(index, 1);
     updateAccount(account);
     setMode(undefined);
-    setCurrentPage(undefined);
+    setCurrent(undefined);
   }
 
   const save = (name) => {
     const account = cloneAccount();
-    const page = account.pages.find(page => page.id === currentPage.id);
+    const page = account.pages.find(page => page.id === current.id);
     page.name = name;
     updateAccount(account);
     setMode(undefined);
-    setCurrentPage(undefined);
+    setCurrent(undefined);
   }
 
   const cancel = () => {
     setMode(undefined);
-    setCurrentPage(undefined);
+    setCurrent(undefined);
   }
 
   const click = (e, page) => {
@@ -84,7 +84,7 @@ const Pages = () => {
       return;
     }
     setMode(PresentMode.Highlight);
-    setCurrentPage(page);
+    setCurrent(page);
   }
 
 
@@ -102,13 +102,13 @@ const Pages = () => {
               <div className={`pageLink ${selectedPage === page ? "active" : ""}`} key={page.id}>
 
 
-                {(!currentPage || currentPage !== page) &&
-                  <PageBrowse page={page} click={click} />
+                {(!current || current !== page) &&
+                  <PageBrowse page={page} click={click}/>
                 }
-                {currentPage && currentPage === page && mode === PresentMode.Highlight &&
+                {current && current === page && mode === PresentMode.Highlight &&
                   <PageHighlight page={page} add={add} edit={edit} remove={remove} cancel={cancel} />
                 }
-                {currentPage && currentPage === page && mode === PresentMode.Edit &&
+                {current && current === page && mode === PresentMode.Edit &&
                   <PageEdit page={page} save={save} cancel={cancel} />
                 }
               </div>
@@ -119,7 +119,7 @@ const Pages = () => {
         }
       </div>
       {
-        selectedPage ? <Page page={selectedPage} /> : <h2>Select a page</h2>
+        selectedPage ? <Page page={selectedPage}  setMode={setMode} setCurrent={setCurrent} current={current} mode={mode} /> : <h2>Select a page</h2>
       }
 
     </div>

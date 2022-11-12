@@ -77,7 +77,7 @@ export const updateAccount = (account, setMode = null, setCurrent = null, layout
   }
 
   store.dispatch(updateAccountRequest());
-  return axios
+  axios
     .put(apiUrl, account, c)
     .then(response => {
       const account = response.data;

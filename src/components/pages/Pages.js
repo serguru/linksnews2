@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import "./Pages.css";
 import { LayoutSection, PresentMode } from '../../helpers/enums';
+import { getSelectedPageId, setSelectedPageId } from '../../helpers/utils';
 import PageEdit from './PageEdit';
 import PageBrowse from './PageBrowse';
 import PageHighlight from './PageHighlight';
@@ -15,12 +16,15 @@ const Pages = () => {
   const data = useSelector(state => state.accountData)
 
   const [currentPage, setCurrentPage] = useState();
+  const [selectedPage, setSelectedPage] = useState();
   const [mode, setMode] = useState();
 
   useEffect(
     () => {
       if (data?.account?.pages?.length > 0) {
-        setCurrentPage(data.account.pages[0]);
+        const pid = getSelectedPageId();
+        const page = data.account.pages.find(x => x.id === pid);
+        setSelectedPage(page || data.account.pages[0]);
       }
     },[data]
   )
@@ -62,21 +66,21 @@ const Pages = () => {
     const account = cloneAccount();
     const page = account.pages.find(page => page.id === currentPage.id);
     page.name = name;
+    updateAccount(account);
     setMode(undefined);
-    updateAccount(account).then((acc) => {
-      const page = acc.pages.find(x => x.id === currentPage?.id) 
-      setCurrentPage(page);
-    })
+    setCurrentPage(undefined);
   }
 
   const cancel = () => {
     setMode(undefined);
+    setCurrentPage(undefined);
   }
 
   const click = (e, page) => {
     if (!e.ctrlKey) {
       setMode(undefined);
-      setCurrentPage(page);
+      setSelectedPageId(page.id);
+      setSelectedPage(page);
       return;
     }
     setMode(PresentMode.Highlight);
@@ -95,10 +99,10 @@ const Pages = () => {
           data.account?.pages ? (
             data.account.pages.map(page => (
 
-              <div className={`pageLink ${currentPage === page ? "active" : ""}`} key={page.id}>
+              <div className={`pageLink ${selectedPage === page ? "active" : ""}`} key={page.id}>
 
 
-                {(!mode || currentPage !== page) &&
+                {(!currentPage || currentPage !== page) &&
                   <PageBrowse page={page} click={click} />
                 }
                 {currentPage && currentPage === page && mode === PresentMode.Highlight &&
@@ -115,7 +119,7 @@ const Pages = () => {
         }
       </div>
       {
-        currentPage ? <Page page={currentPage} /> : <h2>Select a page</h2>
+        selectedPage ? <Page page={selectedPage} /> : <h2>Select a page</h2>
       }
 
     </div>

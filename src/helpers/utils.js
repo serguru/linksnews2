@@ -53,7 +53,7 @@ export const addObject = (objects, newObj, selectedObj = null, before = true) =>
   objects.splice(index, 0, newObj);
 }
 
-export const findNewLayoutSection = (account, section, id) => {
+export const findLayoutSection = (account, section, id) => {
 
   if (section === LayoutSection.Page) {
     return account.pages.find(x => x.id === id)
@@ -93,4 +93,13 @@ export const findNewLayoutSection = (account, section, id) => {
 
   return null;
 
+}
+
+export const getSelectedPageId = () => {
+  const result = localStorage.getItem("selectedPageId");
+  return result;
+}
+
+export const setSelectedPageId = (selectedPageId) => {
+  localStorage.setItem("selectedPageId", selectedPageId);
 }

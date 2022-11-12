@@ -10,7 +10,7 @@ import {
 import store from '../../redux/store'
 import { config, apiUrl } from '../../helpers/utils';
 import { PresentMode } from '../../helpers/enums';
-import { findNewLayoutSection } from '../../helpers/utils';
+import { findLayoutSection } from '../../helpers/utils';
 
 export const fetchAccount = () => {
 
@@ -30,7 +30,7 @@ export const fetchAccount = () => {
       if (!account) {
 
         // For the very first call Azure can return an empty response
-        // eve though an account was found in the DB
+        // even though an account was found in the DB
         if (counter === 0) {
           counter++;
           fetchAccount();
@@ -82,7 +82,7 @@ export const updateAccount = (account, setMode = null, setCurrent = null, layout
     .then(response => {
       const account = response.data;
       if (setCurrent) {
-        const obj = findNewLayoutSection(account, layoutSection, id);
+        const obj = findLayoutSection(account, layoutSection, id);
         if (obj) {
           setCurrent(obj);
           setMode(PresentMode.Edit);

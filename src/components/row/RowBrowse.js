@@ -86,7 +86,7 @@ const RowBrowse = ({ page, row, select, setMode, setCurrent, current, mode }) =>
 
     return (
         <div>
-            <div className="clickableElement centerText" onClick={() => select(row)} title="Click to edit">{row.name || "No name row"}</div>
+            <div className="clickableElement centerText sectionCaption" onClick={() => select(row)} title="Click to edit">{row.name}</div>
             {element}
         </div>
     )

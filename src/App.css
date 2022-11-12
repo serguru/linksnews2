@@ -12,3 +12,6 @@
   text-align: center;
 }
 
+.sectionCaption {
+  min-height: 0.5rem;
+}

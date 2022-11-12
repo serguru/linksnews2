@@ -90,7 +90,7 @@ const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current,
 
     return (
         <div>
-            <div className="clickableElement centerText" onClick={() => select(column)} title="Click to edit">{column.name || "No name column"}</div>
+            <div className="clickableElement centerText sectionCaption" onClick={() => select(column)} title="Click to edit">{column.name}</div>
             {element}
         </div>
     )

@@ -26,8 +26,17 @@ const Pages = () => {
         const page = data.account.pages.find(x => x.id === pid);
         setSelectedPage(page || data.account.pages[0]);
       }
-    },[data]
+    }, [data]
   )
+
+  useEffect(() => {
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        setMode(undefined);
+        setCurrent(undefined);
+      }
+    })
+  }, [])
 
   const add = (page = null, before = true) => {
     const account = cloneAccount();
@@ -103,7 +112,7 @@ const Pages = () => {
 
 
                 {(!current || current !== page) &&
-                  <PageBrowse page={page} click={click}/>
+                  <PageBrowse page={page} click={click} />
                 }
                 {current && current === page && mode === PresentMode.Highlight &&
                   <PageHighlight page={page} add={add} edit={edit} remove={remove} cancel={cancel} />
@@ -119,7 +128,7 @@ const Pages = () => {
         }
       </div>
       {
-        selectedPage ? <Page page={selectedPage}  setMode={setMode} setCurrent={setCurrent} current={current} mode={mode} /> : <h2>Select a page</h2>
+        selectedPage ? <Page page={selectedPage} setMode={setMode} setCurrent={setCurrent} current={current} mode={mode} /> : <h2>Select a page</h2>
       }
 
     </div>

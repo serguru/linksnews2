@@ -8,9 +8,20 @@ const ColumnEdit = ({ column, save, cancel }) => {
 
     const [name, setName] = useState(column.name);
 
-    return <div className="highlightContainer">
+    const handleKeyDown = e => {
+        if (e.key === 'Enter') {
+            save(name)
+        }
+    }
+
+
+    return <div className="highlightContainer" onKeyDown={handleKeyDown}>
         <div className="tf">
-            <TextField id="name" label="Name" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} />
+            <TextField id="name" label="Name" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} autoFocus
+                onFocus={event => {
+                    event.target.select();
+                }}
+            />
         </div>
         <div className='iconsContainer'>
             <div title="Submit changes">

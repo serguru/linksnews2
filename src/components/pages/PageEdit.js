@@ -8,8 +8,24 @@ const PageEdit = ({ page, save, cancel }) => {
 
     const [name, setName] = useState(page.name);
 
-    return <div className="highlightContainer">
-        <TextField id="name" label="Name" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} />
+    const handleKeyDown = e => {
+        if (e.key === 'Enter') {
+            save(name)
+        }
+    }
+
+    return <div className="highlightContainer" onKeyDown={handleKeyDown}>
+        <TextField
+            id="name"
+            label="Name"
+            variant="outlined"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            autoFocus
+            onFocus={event => {
+                event.target.select();
+            }}
+        />
         <div className='iconsContainer'>
             <div title="Submit changes">
                 <BackupRoundedIcon onClick={() => save(name)} />

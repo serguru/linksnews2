@@ -116,7 +116,7 @@ const Pages = () => {
           data.account?.pages ? (
             data.account.pages.map(page => (
 
-              <div className={`pageLink ${selectedPage === page ? "active" : mousePage === page ? "hovered" : ""}`} key={page.id}
+              <div className={`pageLink ${selectedPage === page ? "active" : (!current || current !== page) && mousePage === page ? "hovered" : ""}`} key={page.id}
               
               onMouseEnter = {() => setMousePage(page)}
               onMouseLeave = {() => setMousePage()}

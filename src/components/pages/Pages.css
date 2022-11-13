@@ -20,6 +20,9 @@
     font-weight: bolder;
 }
 
+.pageLink.hovered {
+    text-decoration: underline;
+}
 
 .highlightContainer {
     border: 2px dashed lightgrey;
@@ -45,3 +48,4 @@
     display: flex;
     flex-direction: column;
 }
+

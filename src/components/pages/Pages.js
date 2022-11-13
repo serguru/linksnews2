@@ -17,6 +17,7 @@ const Pages = () => {
 
   const [current, setCurrent] = useState();
   const [selectedPage, setSelectedPage] = useState();
+  const [mousePage, setMousePage] = useState();
   const [mode, setMode] = useState();
 
   useEffect(
@@ -104,7 +105,6 @@ const Pages = () => {
     setCurrent(page);
   }
 
-
   const element = data.loading ? (
     <div className="messageContainer"><h2>Loading</h2></div>
   ) : data.error ? (
@@ -116,7 +116,11 @@ const Pages = () => {
           data.account?.pages ? (
             data.account.pages.map(page => (
 
-              <div className={`pageLink ${selectedPage === page ? "active" : ""}`} key={page.id}>
+              <div className={`pageLink ${selectedPage === page ? "active" : mousePage === page ? "hovered" : ""}`} key={page.id}
+              
+              onMouseEnter = {() => setMousePage(page)}
+              onMouseLeave = {() => setMousePage()}
+              >
 
 
                 {(!current || current !== page) &&

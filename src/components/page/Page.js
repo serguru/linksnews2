@@ -37,10 +37,7 @@ const Page = ({ page, setMode, setCurrent, current, mode }) => {
     setCurrent(row);
   }
 
-  const remove = (row, e) => {
-    if (!e.ctrlKey) {
-      return;
-    }
+  const deleteRow = (row) => {
     const account = cloneAccount();
     const p = account.pages.find(p => p.id === page.id);
     const r = p.rows.find(x => x.id === row.id);
@@ -52,6 +49,13 @@ const Page = ({ page, setMode, setCurrent, current, mode }) => {
     updateAccount(account);
     setMode(undefined);
     setCurrent(undefined);
+  } 
+
+  const remove = (row, e) => {
+    if (!e.ctrlKey) {
+      return;
+    }
+    deleteRow(row);
   }
 
   const save = (name) => {
@@ -65,6 +69,10 @@ const Page = ({ page, setMode, setCurrent, current, mode }) => {
   }
 
   const cancel = () => {
+    if (current && current.name === "new row") {
+      deleteRow(current);
+      return;
+    }
     setMode(undefined);
     setCurrent(undefined);
   }

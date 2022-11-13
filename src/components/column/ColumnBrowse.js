@@ -31,10 +31,7 @@ const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current,
         setCurrent(link);
     }
 
-    const remove = (link, e) => {
-        if (!e.ctrlKey) {
-            return;
-        }
+    const deleteLink = (link) => {
         const account = cloneAccount();
         const rows =  account.pages.find(p => p.id === page.id).rows;
         const columns = rows.find(p => p.id === row.id).columns;
@@ -48,6 +45,13 @@ const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current,
         updateAccount(account);
         setMode(undefined);
         setCurrent(undefined);
+    }
+
+    const remove = (link, e) => {
+        if (!e.ctrlKey) {
+            return;
+        }
+        deleteLink(link);
     }
 
     const save = (name, url) => {
@@ -64,6 +68,10 @@ const ColumnBrowse = ({ page, row, column, select, setMode, setCurrent, current,
     }
 
     const cancel = () => {
+        if (current && current.name === "new link") {
+            deleteLink(current);
+            return;
+        }
         setMode(undefined);
         setCurrent(undefined);
     }

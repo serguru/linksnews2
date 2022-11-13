@@ -56,10 +56,7 @@ const Pages = () => {
     setCurrent(page);
   }
 
-  const remove = (page, e) => {
-    if (!e.ctrlKey) {
-      return;
-    }
+  const deletePage = (page) => {
     const account = cloneAccount();
     const index = account.pages.indexOf(account.pages.find(x => x.id === page.id));
     if (index < 0) {
@@ -69,6 +66,13 @@ const Pages = () => {
     updateAccount(account);
     setMode(undefined);
     setCurrent(undefined);
+  }
+
+  const remove = (page, e) => {
+    if (!e.ctrlKey) {
+      return;
+    }
+    deletePage(page);
   }
 
   const save = (name) => {
@@ -81,6 +85,10 @@ const Pages = () => {
   }
 
   const cancel = () => {
+    if (current && current.name === "new page") {
+      deletePage(current);
+      return;
+    }
     setMode(undefined);
     setCurrent(undefined);
   }

@@ -21,7 +21,9 @@ const LinkEdit = ({ link, save, cancel }) => {
             }}
         />
         <div className="tf">
-            <TextField id="url" label="Url" variant="outlined" value={url} onChange={(e) => setUrl(e.target.value)} />
+            <TextField id="url" label="Url" variant="outlined" value={url} onChange={(e) => setUrl(e.target.value)} onFocus={event => {
+                event.target.select();
+            }} />
         </div>
 
 

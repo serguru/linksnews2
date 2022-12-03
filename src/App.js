@@ -19,9 +19,7 @@ function App() {
 
 
   return (
-    <div>
       <Pages />
-    </div>
   )
 }
 
